@@ -1,0 +1,92 @@
+{
+  "name": "ravindra-workspace",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "ravindra-workspace",
+  "sourceRoot": "apps/ravindra-workspace/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ravindra-workspace",
+        "index": "apps/ravindra-workspace/src/index.html",
+        "browser": "apps/ravindra-workspace/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/ravindra-workspace/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/ravindra-workspace/src/favicon.ico",
+          "apps/ravindra-workspace/src/assets"
+        ],
+        "styles": ["apps/ravindra-workspace/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/ravindra-workspace/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/ravindra-workspace/server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "ravindra-workspace:build:production"
+        },
+        "development": {
+          "buildTarget": "ravindra-workspace:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "ravindra-workspace:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ravindra-workspace/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "ravindra-workspace:build",
+        "staticFilePath": "dist/apps/ravindra-workspace/browser"
+      }
+    }
+  }
+}
