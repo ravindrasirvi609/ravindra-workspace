@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ravindra-workspace/category": ["home/src/lib/category/src/index.ts"],
+      "@ravindra-workspace/home": ["home/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
