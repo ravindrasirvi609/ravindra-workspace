@@ -1,10 +1,8 @@
-import { createSelector } from '@ngrx/store';
-import { AppState } from '../models/app-state.model';
-import { CategoryState } from '../models/category-state.model';
+import { CategoryState } from '../src/category.reducer';
 
-export const selectCategory = (state: AppState) => state.category;
+export const selectCategoryState = (state: CategoryState) => state;
 
-export const getCategory = createSelector(
-    selectCategory,
-    (categoryState: CategoryState) => categoryState.category
-);
+export const selectCategories = (state: CategoryState) => state.categories;
+
+export const selectError = (state: CategoryState) =>
+  state.error;
