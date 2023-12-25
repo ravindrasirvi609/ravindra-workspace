@@ -4,6 +4,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { CategoryService } from '@ravindra-workspace/category';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
 
 //import { CategoryService } from '';
 @Component({
@@ -15,13 +16,14 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   title = 'ravindra-workspace';
-  categories = this.categoryService.getCategories();
+  categories = this.store.select('categories');
 
-  constructor(private readonly categoryService: CategoryService) {
-    console.log('AppComponent constructor');
-  }
+  constructor(
+    private readonly categoryService: CategoryService,
+    private readonly store: Store
+  ) {}
+
   ngOnInit() {
-    console.log('AppComponent ngOnInit');
     this.categoryService.getCategories().subscribe((data) => {
       console.log('AppComponent ngOnInit data', data);
     });
