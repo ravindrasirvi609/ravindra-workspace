@@ -16,7 +16,7 @@ import { Store } from '@ngrx/store';
 })
 export class AppComponent implements OnInit {
   title = 'ravindra-workspace';
-  categories = this.store.select('categories');
+  categories = this.store.select((state: any) => state.categories);
 
   constructor(
     private readonly categoryService: CategoryService,
